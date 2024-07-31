@@ -67,3 +67,7 @@ window.onload=function(){
     DisplayMovies();
   }
 }
+
+document.getElementById('nav_l1').addEventListener('click',function(){
+  console.log("LOOOOL");
+})
