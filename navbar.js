@@ -4,34 +4,51 @@ navObj={
   'n3':document.getElementById('nav_l3'),
   'n4':document.getElementById('nav_l4'),
 };
-let ptag=document.createElement('p');
+let div=document.createElement('div');
+let h1=document.createElement('h1');
+let h3=document.createElement('h3');
 
-navObj['n1'].addEventListener('click',function(){
-  ptag.innerHTML='movies omgggg'
+// window.onload=navL1()
+
+function navL1(){
   navObj['n1'].style.pointerEvents = 'none';
   for(let i in navObj){
     if(i!='n1'){
       console.log(i+" et "+navObj[i]);
       navObj[i].style.pointerEvents = 'auto';
     }
-  }
-  document.body.appendChild(ptag);
-});
+  } 
+  h1.innerHTML='Unleash the Power of CineFlix';
+  h3.innerHTML="Check out our Offerings!";
+
+  div.setAttribute("id", "messageBox");
+  
+  div.appendChild(h1);
+  div.appendChild(h3);
+  document.body.appendChild(div);
+};
+
 
 navObj['n2'].addEventListener('click',function(){
-  ptag.innerHTML='shows';
+ 
   navObj['n2'].style.pointerEvents = 'none';
   for(let i in navObj){
     if(i!='n2'){
       console.log(i+" et "+navObj[i]);
       navObj[i].style.pointerEvents = 'auto';
     }
-  }
-  document.body.appendChild(ptag);
+  }  
+
+  h1.innerHTML='LOOOOOOOL';
+  h3.innerHTML='wtf!';
+  div.setAttribute("id", "messageBox");
+  
+  div.appendChild(h1);
+  div.appendChild(h3);
+  document.body.appendChild(div);
 });
 
 navObj['n3'].addEventListener('click',function(){
-  ptag.innerHTML='GAMESSS';
   navObj['n3'].style.pointerEvents = 'none';
   for(let i in navObj){
     if(i!='n3'){
@@ -39,11 +56,9 @@ navObj['n3'].addEventListener('click',function(){
       navObj[i].style.pointerEvents = 'auto';
     }
   }
-  document.body.appendChild(ptag);
 });
 
 navObj['n4'].addEventListener('click',function(){
-  ptag.innerHTML='Alll erythang!';
   navObj['n4'].style.pointerEvents = 'none';
   for(let i in navObj){
     if(i!='n4'){
@@ -51,5 +66,4 @@ navObj['n4'].addEventListener('click',function(){
       navObj[i].style.pointerEvents = 'auto';
     }
   }
-  document.body.appendChild(ptag);
 });

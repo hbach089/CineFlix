@@ -42,7 +42,7 @@ async function DisplayMovies(){
         
         classdiv.appendChild(figElem);
         document.body.appendChild(classdiv);
-
+        console.log(figElem);
         div.appendChild(classdiv);
         document.body.appendChild(div);
       }
