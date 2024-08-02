@@ -8,6 +8,8 @@ body{
   margin: 0;
   width: 100vw;
   height: 100vh;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 
@@ -21,37 +23,36 @@ input{
   color: white;
 }
 
-.divit{
-  /* width:22%; */
-  width: 18%;
-  min-height: 100px;
-  float:left;
-  text-align: center;
-  margin-top: 1cm;
-  /* margin-left: 1cm; */
-  overflow: hidden;
-}
-
 #divwithclasses{
   /* margin-left: 3cm; */
+  margin-top: 45%;
   position: relative;
   border: 2px solid red;
-  width: 80%;
-  overflow: hidden;
+  width: 90%;
+  float: left;
+}
+
+.divit{
+  /* width:22%; */
+  /* width: 18%; */
+  float:left;
+  position: relative;
+  margin-top: 1cm;
+  height: auto;
+  margin-left: 0.5cm;
+  border: 2px yellow solid;
 }
 
 figure{
   /* flex: 33.33%; */
+  border: 4px solid aqua;
   width: 5cm;
-  /* float: left; */
   position: relative;
-  overflow: hidden;
 }
 
 img{
   width: 5cm;
   height: 8cm;
-  overflow: hidden;
 }
 
 figure:hover figcaption{
@@ -60,7 +61,8 @@ figure:hover figcaption{
   position: absolute;
   bottom: 0;
   text-align: center;
-  background: rgba(232, 227, 227, 0.8);
+  background: rgba(238, 183, 255, 0.8);
+  /* background: rgba(232, 227, 227, 0.8); */
   color: black;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   width: 5cm;
@@ -147,3 +149,10 @@ h3{
   }
 }
 
+h5{
+  color: red !important;
+  padding-top: 18cm;
+  right:0;
+  position: absolute;
+  writing-mode: vertical-lr;text-orientation: upright;
+}

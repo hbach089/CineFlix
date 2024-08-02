@@ -4,11 +4,11 @@ navObj={
   'n3':document.getElementById('nav_l3'),
   'n4':document.getElementById('nav_l4'),
 };
-let div=document.createElement('div');
+let divText=document.createElement('div');
 let h1=document.createElement('h1');
 let h3=document.createElement('h3');
 
-// window.onload=navL1()
+window.onload=navL1();
 
 function navL1(){
   navObj['n1'].style.pointerEvents = 'none';
@@ -21,11 +21,11 @@ function navL1(){
   h1.innerHTML='Unleash the Power of CineFlix';
   h3.innerHTML="Check out our Offerings!";
 
-  div.setAttribute("id", "messageBox");
+  divText.setAttribute("id", "messageBox");
   
-  div.appendChild(h1);
-  div.appendChild(h3);
-  document.body.appendChild(div);
+  divText.appendChild(h1);
+  divText.appendChild(h3);
+  document.body.appendChild(divText);
 };
 
 
@@ -41,10 +41,10 @@ navObj['n2'].addEventListener('click',function(){
 
   h1.innerHTML='LOOOOOOOL';
   h3.innerHTML='wtf!';
-  div.setAttribute("id", "messageBox");
+  divText.setAttribute("id", "messageBox");
   
-  div.appendChild(h1);
-  div.appendChild(h3);
+  divText.appendChild(h1);
+  divText.appendChild(h3);
   document.body.appendChild(div);
 });
 

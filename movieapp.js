@@ -1,9 +1,12 @@
 let a=0;
 
+let div=document.createElement('div');
+div.setAttribute("id", "divwithclasses");
 
 async function DisplayMovies(){
+  let word=document.getElementById('searchit').value;/*localStorage.getItem('word')*/
   sessionStorage.removeItem("reloading");
-    const url = 'https://movie-database-alternative.p.rapidapi.com/?s='+localStorage.getItem('word')+'&r=json&page=2';
+    const url = 'https://movie-database-alternative.p.rapidapi.com/?s='+word+'&r=json&page=2';
       const options = {
       method: 'GET',
       headers: {
@@ -15,11 +18,11 @@ async function DisplayMovies(){
     try {
       const response = await fetch(url, options);
       const result = await response.json();
-      console.log(result);
-      console.log(result.Search);
+      // console.log(result);
+      // console.log(result.Search);
 
-      let div=document.createElement('div');
-      div.setAttribute("id", "divwithclasses");
+     
+      
       for(let i in result.Search){
 
         let classdiv = document.createElement('div');
@@ -38,11 +41,11 @@ async function DisplayMovies(){
         
         figElem.appendChild(imageElem);
         figElem.appendChild(figCaptionElem);
-        console.log(figElem);
+        // console.log(figElem);
         
         classdiv.appendChild(figElem);
         document.body.appendChild(classdiv);
-        console.log(figElem);
+        // console.log(figElem);
         div.appendChild(classdiv);
         document.body.appendChild(div);
       }
@@ -50,23 +53,33 @@ async function DisplayMovies(){
     } catch (error) {
       console.error(error);
     }
+  div.scrollIntoView();
+  let d=document.createElement('h5');
+  d.innerHTML="LOOOOOOOL";
+  document.body.appendChild(d);
 }
 
 
 document.getElementById('btnit').addEventListener('click',function(){
-  sessionStorage.setItem('reloading',true);
-  let word=document.getElementById('searchit').value;
-  localStorage.setItem('word',word);
-  window.location.reload();
+  // sessionStorage.setItem('reloading',true);
+  // let word=document.getElementById('searchit').value;
+  // localStorage.setItem('word',word);
+  // window.location.reload();
+  if(div.innerHTML){
+    div.innerHTML='';
+    console.log(div.innerHTML+" LOOL");
+  }
+
+  DisplayMovies();
 });
 
-window.onload=function(){
-  var reloading = sessionStorage.getItem("reloading");
-  console.log(reloading);
-  if(reloading){
-    DisplayMovies();
-  }
-}
+// window.onload=function(){
+//   var reloading = sessionStorage.getItem("reloading");
+//   console.log(reloading);
+//   if(reloading){
+//     DisplayMovies();
+//   }
+// }
 
 document.getElementById('nav_l1').addEventListener('click',function(){
   console.log("LOOOOL");
