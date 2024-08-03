@@ -54,8 +54,9 @@ async function DisplayMovies(){
       console.error(error);
     }
   div.scrollIntoView();
-  let d=document.createElement('h5');
-  d.innerHTML="LOOOOOOOL";
+  
+  let d=document.createElement('h2');
+  d.innerHTML="FEATURED";
   document.body.appendChild(d);
 }
 
