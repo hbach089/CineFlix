@@ -5,7 +5,6 @@ navObj={
   'n4':document.getElementById('nav_l4'),
 };
 
-
 let divText=document.createElement('div');
 let option='';
 divText.setAttribute("id", "messageBox");
@@ -20,7 +19,7 @@ let d=document.createElement('h2');
 
 window.onload=navL1();
 
-function navL1(){
+async function navL1(){
   option='home';
   navObj['n1'].style.pointerEvents = 'none';
   for(let i in navObj){
@@ -31,7 +30,6 @@ function navL1(){
 
   divText.innerHTML='';
   image.src='fam.png';
-  console.log(lol);
   h1.innerHTML='Unleash the Power of CineFlix';
   h3.innerHTML="Check out our Offerings!";
 
@@ -46,16 +44,21 @@ function navL1(){
     //   console.log('niceeeeeee');
     //   div.scrollIntoView();  
     // }
-    console.log(window.scrollY);
-    console.log(div);
-    d.innerHTML="FEATURED";
+    // d.innerHTML="FEATURED";
+    // document.body.appendChild(d);
+    let dispCnt=await DisplayMovies();
+    if(dispCnt==0){
+      d.innerHTML="";
+    }
+    else{
+      d.innerHTML="FEATURED";
+    }
     document.body.appendChild(d);
-    DisplayMovies();
   }
 };
 
 
-navObj['n2'].addEventListener('click',function(){
+navObj['n2'].addEventListener('click',async function(){
   option='movie';
   navObj['n2'].style.pointerEvents = 'none';
   for(let i in navObj){
@@ -78,25 +81,28 @@ navObj['n2'].addEventListener('click',function(){
 
   document.body.appendChild(divText);
   document.body.appendChild(image);
-  console.log(lol);
   if(lol=='nice'){
     // window.scrollTo(0, 547.3333129882812);
     // if(window.scrollY!=547.3333129882812){
     //   console.log('niceeeeeee');
     //   div.scrollIntoView();  
     // }
-    console.log(window.scrollY)
     // let d=document.createElement('h2');
-    console.log(div.offsetTop);
-    console.log(div);
-    d.innerHTML="MOVIES";
+    // d.innerHTML="MOVIES";
+    // document.body.appendChild(d);
+    let dispCnt=await DisplayMovies();
+    if(dispCnt==0){
+      d.innerHTML="";
+    }
+    else{
+      d.innerHTML="MOVIES";
+    }
+    
     document.body.appendChild(d);
-    DisplayMovies();
-
   }
 });
 
-navObj['n3'].addEventListener('click',function(){
+navObj['n3'].addEventListener('click',async function(){
   option='series';
   navObj['n3'].style.pointerEvents = 'none';
   for(let i in navObj){
@@ -123,17 +129,22 @@ navObj['n3'].addEventListener('click',function(){
     //   console.log('niceeeeeee');
     //   div.scrollIntoView();  
     // }
-    console.log(window.scrollY)
-    console.log(div.offsetTop);
     // let d=document.createElement('h2');
-    console.log(div);
-    d.innerHTML="TV";
+    // d.innerHTML="TV";
+    // document.body.appendChild(d);
+    let dispCnt=await DisplayMovies();
+    if(dispCnt==0){
+      d.innerHTML="";
+    }
+    else{
+      d.innerHTML="TV";
+    }
+    
     document.body.appendChild(d);
-    DisplayMovies();
   }
 });
 
-navObj['n4'].addEventListener('click',function(){
+navObj['n4'].addEventListener('click',async function(){
   option='game';
   navObj['n4'].style.pointerEvents = 'none';
   for(let i in navObj){
@@ -162,13 +173,17 @@ navObj['n4'].addEventListener('click',function(){
     //   console.log('niceeeeeee');
     //   div.scrollIntoView();  
     // }
-    console.log(window.scrollY);
-    console.log(div.offsetTop);
-    console.log(div);
     // let d=document.createElement('h2');
-    d.innerHTML="GAMING";
+    
+    let dispCnt=await DisplayMovies();
+    if(dispCnt==0){
+      d.innerHTML="";
+    }
+    else{
+      d.innerHTML="GAMING";
+    }
+    
     document.body.appendChild(d);
-    DisplayMovies();
   }
 });
 

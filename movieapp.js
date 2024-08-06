@@ -2,9 +2,10 @@
 let div=document.createElement('div');
 div.setAttribute("id", "divwithclasses");
 
-let lol='wtf',clicked=false;
+let lol='wtf',clicked=false,cnt;
 
 async function DisplayMovies(){
+  cnt=0;
   if(div.innerHTML){
     div.innerHTML='';
   }
@@ -42,18 +43,17 @@ async function DisplayMovies(){
           }
           let figCaptionElem = document.createElement('figcaption');
           // figCaptionElem.textContent = result.Search[i].Title+", "+result.Search[i].Year+"\r\n"+result.Search[i].Type;
-          figCaptionElem.innerHTML=result.Search[i].Title+", "+result.Search[i].Year+"<br>"+result.Search[i].Type;
+          figCaptionElem.innerHTML=result.Search[i].Title+", "+result.Search[i].Year+"<br>"+'<i>'+result.Search[i].Type+'</i>';
 
           figElem.appendChild(imageElem);
           figElem.appendChild(figCaptionElem);
-          // console.log(figElem);
           
           classdiv.appendChild(figElem);
           document.body.appendChild(classdiv);
           // console.log(figElem);
           div.appendChild(classdiv);
-          console.log(result.Search[i].Type);
-        }
+          cnt+=1;
+      }
         else if(option==result.Search[i].Type){
           let classdiv = document.createElement('div');
           classdiv.classList.add('divit');
@@ -71,49 +71,60 @@ async function DisplayMovies(){
           
           figElem.appendChild(imageElem);
           figElem.appendChild(figCaptionElem);
-          // console.log(figElem);
           
           classdiv.appendChild(figElem);
           document.body.appendChild(classdiv);
-          // console.log(figElem);
           div.appendChild(classdiv);
-          console.log(result.Search[i].Type);
-        }
-        
+          cnt+=1;
       }
-      document.body.appendChild(div);
+      }
+      if(cnt==0){
+        let h4=document.createElement('h4');
+        h4.innerHTML='No search RESULTS!!!!!!';
+        div.appendChild(h4);
+        // div.style.color='yellow';
+        // document.body.appendChild(h5);
+        // div.innerHTML='No search RESULTS!!!!!!';
+      }
 
+      console.log(div+' et '+ cnt);
+      document.body.appendChild(div);
       
     } catch (error) {
       console.error(error);
     }
   // div.scrollIntoView();
-  console.log(option+'  and   '+clicked+" LOOOOOLmao");
-  if(option=='home' && clicked==true){
+  if(option=='home' && clicked==true && cnt>0){
     div.scrollIntoView();  
     // let d=document.createElement('h2');
     d.innerHTML="FEATURED";
     document.body.appendChild(d);
   }
-  else if(option=='movie' && clicked==true){
+  else if(option=='movie' && clicked==true && cnt>0){
     div.scrollIntoView();  
     // let d=document.createElement('h2');
     d.innerHTML="movies";
     document.body.appendChild(d);
   }
-  else if(option=='series' && clicked==true){
+  else if(option=='series' && clicked==true && cnt>0){
     div.scrollIntoView();  
     // let d=document.createElement('h2');
     d.innerHTML="TV";
     document.body.appendChild(d);
   }
-  else if(option=='game' && clicked==true){
+  else if(option=='game' && clicked==true && cnt>0){
     div.scrollIntoView();  
     // let d=document.createElement('h2');
+    console.log('LOOOOOOL');
     d.innerHTML="GAMING";
     document.body.appendChild(d);
   }
+  else{
+    // d.innerHTML='';
+    // document.body.appendChild(d);
+  }
   clicked=false;
+  return cnt;
 }
 
 
@@ -126,7 +137,6 @@ document.getElementById('btnit').addEventListener('click',function(){
   if(div.innerHTML){
     div.innerHTML='';
   }
-  console.log(option+' sur quoi on clique');
   DisplayMovies();
 });
 
@@ -139,6 +149,5 @@ document.getElementById('btnit').addEventListener('click',function(){
 // }
 
 document.getElementById('nav_l1').addEventListener('click',function(){
-  console.log("LOOOOL");
 })
 
