@@ -50,7 +50,10 @@ async function DisplayMovies(){
           
           classdiv.appendChild(figElem);
           document.body.appendChild(classdiv);
-          // console.log(figElem);
+          console.log(figElem);
+
+          figElem.onclick=function(){PriceOfferings()};
+
           div.appendChild(classdiv);
           cnt+=1;
       }
@@ -74,10 +77,14 @@ async function DisplayMovies(){
           
           classdiv.appendChild(figElem);
           document.body.appendChild(classdiv);
+
+          figElem.onclick=function(){PriceOfferings()};
+
           div.appendChild(classdiv);
           cnt+=1;
       }
       }
+      
       if(cnt==0){
         let h4=document.createElement('h4');
         h4.innerHTML='No search RESULTS!!!!!!';
@@ -119,10 +126,6 @@ async function DisplayMovies(){
     d.innerHTML="GAMING";
     document.body.appendChild(d);
   }
-  else{
-    // d.innerHTML='';
-    // document.body.appendChild(d);
-  }
   clicked=false;
   return cnt;
 }
@@ -151,3 +154,7 @@ document.getElementById('btnit').addEventListener('click',function(){
 document.getElementById('nav_l1').addEventListener('click',function(){
 })
 
+
+function PriceOfferings(){
+  window.location='priceofferings.html'
+}

@@ -110,8 +110,7 @@ p:hover{
 
 h1 {
   color: white !important;
-  /* width: 11cm; */
-  font-family:Verdana, Geneva, Tahoma, sans-serif
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 h3{
   color: white !important;
@@ -178,4 +177,60 @@ h2{
   writing-mode: vertical-lr;
   text-orientation: upright;
   cursor: default;
+}
+
+
+/* Price Offering page */
+
+#PriceOfferingPage{
+  overflow: hidden;
+}
+
+.offeringTitle{
+  text-align: center;
+  font-size:larger;
+}
+.pricing{
+  text-align: center;
+}
+.ofrglist{
+  margin: 5px;
+  padding: 1px;
+  font-size:small;
+}
+
+.container {
+  display: flex;
+  /* margin: 1rem; */
+  /* padding: 2rem 2rem; */
+  top: 18%;
+  position: relative;
+  justify-content: center;
+}
+.container > div {
+  flex: 1; /*grow*/
+  background-color: rgba(207, 207, 25, 0.731);
+  border-radius: 0.8cm;
+  margin: 1rem;
+  text-align: left;
+  color: white;
+  width: 3cm;
+  height: 7.5cm;
+  vertical-align: middle;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#lol{
+  background-color: yellow;
+}
+
+button{
+  margin: 1cm;
+  width: 5cm;
+  font-size: x-large;
+  border-radius: 2cm; 
+  padding: 10px;
+  cursor: pointer;
+  background-color: blueviolet;
+  color: white;
 }
