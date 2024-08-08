@@ -1,27 +1,31 @@
 
-document.getElementById('monthly').addEventListener('click',function(){
-  document.getElementById('monthly').style.color='black';
-  document.getElementById('monthly').style.backgroundColor='rgba(207, 207, 25, 0.731)';
 
-  document.getElementById('yearly').style.color='white';
-  document.getElementById('yearly').style.backgroundColor='blueviolet';
+const monthly=document.getElementById('monthly');
+const yearly=document.getElementById('yearly');
+
+const basic=document.getElementById('price1'),premium=document.getElementById('price2'),family=document.getElementById('price3');
+
+monthly.addEventListener('click',function(){
+  monthly.style.color='black';
+  monthly.style.backgroundColor='rgba(207, 207, 25, 0.731)';
+
+  yearly.style.color='white';
+  yearly.style.backgroundColor='blueviolet';
   
-  document.getElementById('price1').innerHTML='$7.99/Monthly';
-  document.getElementById('price2').innerHTML='$12.99/Monthly';
-  document.getElementById('price3').innerHTML='$16.99/Monthly';
-
+  basic.innerHTML='$7.99/Monthly';
+  premium.innerHTML='$12.99/Monthly';
+  family.innerHTML='$16.99/Monthly';
 });
 
-document.getElementById('yearly').addEventListener('click',function(){
-  document.getElementById('monthly').style.color='white';
-  document.getElementById('monthly').style.backgroundColor='blueviolet';
+yearly.addEventListener('click',function(){
+  monthly.style.color='white';
+  monthly.style.backgroundColor='blueviolet';
 
-  document.getElementById('yearly').style.color='black';
-  document.getElementById('yearly').style.backgroundColor='rgba(207, 207, 25, 0.731)';
+  yearly.style.color='black';
+  yearly.style.backgroundColor='rgba(207, 207, 25, 0.731)';
 
-  document.getElementById('price1').innerHTML='$95.88/Yearly';
-  document.getElementById('price2').innerHTML='$155.88/Yearly';
-  document.getElementById('price3').innerHTML='$203.88/Yearly';
-  
+  basic.innerHTML='$95.88/Yearly';
+  premium.innerHTML='$155.88/Yearly';
+  family.innerHTML='$203.88/Yearly';
 });
 

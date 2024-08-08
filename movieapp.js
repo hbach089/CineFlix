@@ -151,7 +151,8 @@ document.getElementById('btnit').addEventListener('click',function(){
 //   }
 // }
 
-document.getElementById('nav_l1').addEventListener('click',function(){
+document.getElementById('logout').addEventListener('click',()=>{
+  window.location='index.html';
 })
 
 
