@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/update.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <title>Document</title>
+
+</head>
+<body>
+  <nav id="navbar" class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="#" style="font-family: monospace;">CineFlix</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a id="nav_l1" class="nav-link" href="http://localhost:5555/movies" style="font-family: monospace;">Home</a>
+        </li>
+      </ul>
+      
+      <div class="dropdown">
+        <img src="/images/userlogo.png" alt="" id="logo">
+        <div id="logout" class="dropdown-content">
+          <span id="s1" class="drop_btn">Update</span>
+          <span id="s2" class="drop_btn">Delete</span>
+          <span id="s3" class="drop_btn">Logout</span>
+        </div>
+      </div>
+      <div></div>
+    </div>
+  </nav>
+
+  <div id="UpdatePage">
+    <span id="titleAndText">
+      <h1 id="title"><u>Update Your Credentials</u></h1>
+      <p id="textUnderTitle">Doing so will redirect you to the home page</p>
+    </span>
+
+    <div id="updateFieldsDiv">
+
+      <div class="uorpDiv">
+        <div class="inputForm">
+        <h4><li>UserName: <input id="i1" type="text" value='<%=data.uname%>' style="pointer-events: none;">
+        </div>
+        <div class="rules">
+          * At least 6 characters in username
+      </div>
+      <button id="b1">Edit</button></li> 
+
+      </div>
+
+      
+      <!-- <br><hr> -->
+
+      <div id="btm" class="uorpDiv">
+        <div class="inputForm">
+          <h4><li>PassWord: <input id="i2" type="text" value='<%=data.pword%>' style="pointer-events: none;">
+        </div>
+          <div class="rules">
+            * At least 7 characters with at least 1 number and 1 special character in password
+          </div>
+      <button id="b2">Edit</button></li></h4> 
+          
+      </div>
+      
+      
+    </div>
+
+    <h5 id="errMsg"></h5>
+
+      <button id="smbt">Submit</button>
+  </div>
+
+<script>
+
+    // function getReq(){
+    //   $.ajax('http://localhost:5555/UpdateData?nocache='+Math.random(), {
+    //     type: "GET",
+    //     cache: false,
+
+    //     success: function(response) {
+    //         console.log(response);
+    //     },
+    //     error: function() {
+    //         console.log("request no. 1 have failed");
+    //     }
+    //   });
+    // }
+
+
+    
+    // (function getreq(){
+    //     $.post("http://localhost:5555/movies/UpdateData",
+    //     {
+    //       name: "Donald Duck",
+    //       city: "Duckburg"
+    //     },
+    //     function(data, status){
+    //       console.log(data);
+    //     });
+    // })();
+
+
+    let uuid='<%=data.uuid%>';
+    let uname='<%=data.uname%>';
+    let pword='<%=data.pword%>';
+
+    $('html').click(function(event){
+      if(event.target.id=='b1' || event.target.id=='i1'){
+        document.getElementById('i1').style.pointerEvents='all';
+        document.getElementById('i1').style.backgroundColor='rgb(244, 39, 244)';
+        document.getElementById('i1').focus();
+        unset2();
+      }
+      else if(event.target.id=='b2' || event.target.id=='i2'){
+        document.getElementById('i2').style.pointerEvents='all';
+        document.getElementById('i2').style.backgroundColor='rgb(244, 39, 244)';
+        document.getElementById('i2').focus();
+        unset1();
+      }
+      else{
+        unsetAll();
+      }
+    });
+
+    function unset1(){
+        document.getElementById('i1').style.backgroundColor='unset';
+        document.getElementById('i1').style.pointerEvents='none';
+      }
+    function unset2(){
+        document.getElementById('i2').style.backgroundColor='unset';
+        document.getElementById('i2').style.pointerEvents='none';
+      }
+    function unsetAll(){
+        unset1();
+        unset2();
+      }
+
+      $('#smbt').click(function(){
+        $.ajax({
+          url:'http://localhost:5555/User/Update/'+uuid,
+          type:'PUT',
+          data:{uname:document.getElementById('i1').value,pword:document.getElementById('i2').value},
+          success:function(result){
+            document.getElementById('errMsg').innerHTML=result.message;
+            if(result.message=='SUCCESS ON UPDATE!!.'){
+              window.location.replace('http://localhost:5555/');
+            }
+          }
+        });
+      });
+      document.getElementById('s1').addEventListener('click',function(){
+      window.location.replace('http://localhost:5555/User/Update');
+      })
+      document.getElementById('s2').addEventListener('click',function(){
+        window.location.replace('http://localhost:5555/User/Delete');
+      })
+      document.getElementById('s3').addEventListener('click',function(){
+        window.location.replace('http://localhost:5555/');
+      })
+  </script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+</body>
+</html>

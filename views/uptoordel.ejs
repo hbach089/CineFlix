@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+    crossorigin="anonymous">
+  </script>  
+<link rel="stylesheet" href="/css/updOrdel.css">
+  <title>Document</title>
+</head>
+<body>
+  <div id="wrapper">
+    <h1><%=data.UpdOrDel%> User!</h1>
+    <div id="confirm">
+      <div id="forms">
+        <h2><b>Confirm it is you</b></h2>
+        <!-- <form action="/movies/Update/changeFields" method="post"> -->
+          <input type="text" placeholder="Username" id="uname">
+          <input type="Password" placeholder="Password" id="pword">
+          <input type="Password" placeholder="Confirm Password" id="confpword">
+          <%if (data.UpdOrDel=='Update'){%>
+            <input type="submit" placeholder="submit" id="updOrdel" name="submitUoD" value="update">
+         <%}else{%>
+            <%if(data.UpdOrDel=='Delete'){%>
+              <input type="submit" placeholder="submit" id="updOrdel" name="submitUoD" value="delete">
+            <%}%>
+          <%}%> 
+        <!-- </form> -->
+      </div>
+      
+      <div id="delDiv">
+        <p>Are you Sure?</p>
+        <button id="delBtn">DELETE</button>
+        <button id="cclBtn">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- <br><br> -->
+  <span>
+    <h3 id="errmsg"></h3>
+  </span>
+
+  <script>
+    
+    let uuid='<%=data.uuid%>';
+    const uptordel='<%=data.UpdOrDel%>';
+    console.log(uptordel+'    DANS LE JSSSSSSSS');
+
+   
+      $("#updOrdel").click(function(){
+        if(uptordel=='Delete'){
+            clickOnDelete();
+        }
+        else if(uptordel=='Update'){
+          clickOnUpdate();
+        }
+      });
+    
+
+    function clickOnDelete(){
+      $.post("/User/Delete",
+        {
+          uname: document.getElementById('uname').value,
+          pword: document.getElementById('pword').value,
+          confpword: document.getElementById('pword').value,
+          updOrdel: document.getElementById('updOrdel').value
+        },
+        function(data, status){
+          let message=data.message;
+          console.log(message);
+
+          if(message=='success'){
+            onDeleteSuccess(); 
+          }
+          else{
+            document.getElementById('errmsg').innerHTML=message;
+          }
+        });
+      
+    }
+
+
+    function clickOnUpdate(){
+      $.post("/User/Update",
+        {
+          uname: document.getElementById('uname').value,
+          pword: document.getElementById('pword').value,
+          confpword: document.getElementById('pword').value,
+          updOrdel: document.getElementById('updOrdel').value
+        },
+        function(data, status){
+          let message=data.message;
+          console.log(message);
+          if(message=='success'){
+            onUpdateSuccess();
+          }
+          else{
+            document.getElementById('errmsg').innerHTML=message;
+          }
+        });
+    }
+
+    function onDeleteSuccess(){
+      document.getElementById('errmsg').innerHTML='';
+      document.getElementById('forms').style.display='none';
+      document.getElementById('delDiv').style.display='block';
+
+      // document.getElementById('delBtn').addEventListener('click',function(){
+      $("#delBtn").click(function(){
+        $.ajax({
+            url: '/User/Delete/'+uuid,
+            type: 'DELETE',
+            success: function (result) {
+              console.log(result);
+                // Do something with the result
+            }
+        });
+      })
+      // })
+
+      document.getElementById('cclBtn').addEventListener('click',function(){
+        // document.getElementById('forms').style.display='block';
+        // document.getElementById('delDiv').style.display='none';
+        window.location.href='http://localhost:5555/User/Delete';
+      })
+    }
+
+    function onUpdateSuccess(){
+      document.getElementById('errmsg').innerHTML='';
+      window.location.href='http://localhost:5555/User/Update/'+uuid;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+/* Login page */
+
+body{
+  overflow: hidden;
+  animation: fadeInAnimation ease 3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  background-color: rgb(82, 4, 105) !important;
+  font-family: monospace;
+  color: white;
+}
+@keyframes fadeInAnimation {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+
+h1{
+  position: relative;
+  top: 2cm;
+  font-size: 2.5cm;
+  padding-left: 10px;
+}
+
+h2{
+  position: absolute;
+  border: 2px solid white;
+  top: 6cm;
+  padding-left: 10px;
+  font-size:1cm;
+}
+
+.logOrReg{
+  position: absolute;
+  border: 2px solid white !important;
+  right: 6%;
+  top: 14%;
+  width: 8cm;
+  height: 11cm;
+  font-family: monospace;
+  padding: 15px;
+  font-size: x-large;
+  color: white;
+  background-color: blueviolet !important;
+}
+
+#loginDiv{
+  display: block;
+  position: absolute;
+  right: -2%;
+  top: 3%;
+  width: 8cm;
+  height: 11cm;
+}
+
+#signupDiv{
+  display: none;
+  position: absolute;
+  right: -2%;
+  top: 3%;
+  width: 8cm;
+  height: 11cm;
+}
+
+.inputs{
+  position:relative;
+  top:5%;
+  padding-bottom: 1cm;
+}
+
+input[type=text],[type=password]{
+  width: 200px;
+  padding: 10px 20px;
+  margin-bottom: 15px;
+  border-color: transparent;
+  border-bottom: 2px solid white;
+  font-family: monospace;
+  background-color:blueviolet ;
+  font-size: 15px;
+  color: white;
+  outline-color: transparent;
+}
+
+/* #login */
+.subButton{
+  padding: 10px 20px;
+  font-family: monospace;
+  width: 245px;
+  background-color:magenta;
+  outline-color: transparent;
+  border-color: magenta;
+  color: white;
+}
+
+
+/* #login */
+.subButton:hover{
+  cursor: pointer;
+  color: magenta;
+  background-color: white;
+}
+
+::placeholder{
+  color: white;
+}
+
+a{
+  text-decoration: none;
+  color: whitesmoke;
+}
+a:hover{
+  color: black;
+}
+
+h5{
+  position: absolute;
+  top:7%;
+}
+
+#pwd_match{
+  display: none;
+  color: rgb(255, 78, 78);
+  font-size:x-large;
+}
+
+#servermessage{
+  position: absolute;
+  top: 10cm;
+  color: rgb(255, 78, 78);
+  font-size:x-large;
+}

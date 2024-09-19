@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.js" integrity="sha512-luMnTJZ7oEchNDZAtQhgjomP1eZefnl82ruTH/3Oj/Yu5qYtwL7+dVRccACS/Snp1lFXq188XFipHKYE75IaQQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity=
+        "sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+        crossorigin="anonymous">
+    </script>
+  <link rel="stylesheet" href="/css/login.css">
+  <title>Document</title>
+</head>
+<body>
+
+  <h1 id="message1">Welcome Back .!</h1>
+  <h2 id="message2"><i>CineFlix-------</i></h2>
+  <br>
+  <br>
+  <!-- style="display: none;" -->
+  <span class="signupHints" style="display: none;">
+    <h3 id="user_msg">* At least 6 characters in username</h3>
+    <h3 id="pwd_msg">* At 7 characters with at least 1 number and 1 special character in password</h3>
+    <hr>
+  </span>
+ <div class="logOrReg">
+    <div class="loginDiv" id="loginDiv">
+      <h3>Login</h3>
+      <h5>Glad You're Back..!</h5>
+      <div class="inputs">
+        <!-- <form action="/movies" method="POST"> -->
+          <input id="UsernameLogin" type="text" placeholder="UserName" name="uname">
+          <input id="PasswordLogin" type="password" placeholder="Password" name="pword">
+          <br>
+          <input type="submit" value="Login" name="Submit" id="login" class="subButton">
+        <!-- </form> -->
+      </div>
+      
+
+      <p>Don't have an account? <a id="signuplink" href="#" onclick="signupFunc()">Signup</a></p>
+    </div>
+
+    <div id="signupDiv">
+      <h3>SignUp</h3>
+      <h5>New Here..?</h5>
+      <div class="inputs">
+          <input id="UsernameReg" type="text" placeholder="UserName" name="reguname">
+          <input id="PasswordReg" type="password" placeholder="Password" name="regpword">
+          <input id="ConfirmPasswordReg" type="password" placeholder="Confirm Password" name="regconfpword">
+          <br>
+          <input type="submit" value="SignUp" name="Submit" id="signup" class="subButton">
+      </div>
+      <p>Already have an account? <a id="loginlink" href="#" onclick="loginFunc()">Login</a></p>
+    </div>
+ </div>
+
+ <span id="servermessage">
+</span>
+
+
+ <script>
+
+  window.addEventListener("pageshow", (event) => {
+    $.post("/logout",
+  {
+    state:'logout'
+  }
+  // ,
+  // function(data, status){
+  //   console.log("LOOOL");
+  // }
+);
+  });
+
+  
+
+
+
+
+  console.log("INDEX PAGEEEE");
+  $(document).ready(function () {
+   $("#login").click(function () {
+      $.post("/movies",
+         {
+            uname: document.getElementById('UsernameLogin').value,
+            pword: document.getElementById('PasswordLogin').value,
+            Submit: 'Login'
+         },
+         function (data, status) {
+          if(data.data['message']){
+            console.log("ha");
+          }
+          let messageServer=data.data['message'];
+          let bgFieldColor=data.data['bgcolor'];
+
+          if(messageServer=='redirectOnSuccess'){
+            window.location.href = 'http://localhost:5555/movies/';
+            // window.location.replace('http://localhost:5556/movies/');
+          }
+          else{
+            document.getElementById('servermessage').innerHTML=messageServer;
+            console.log(document.getElementById('servermessage').innerText);
+          }
+          
+          document.getElementById('UsernameLogin').innerHTML=data.data['uname'];
+          document.getElementById('PasswordLogin').innerHTML=data.data['pword'];
+
+          if(bgFieldColor=='upcolor'){
+            document.getElementById('UsernameLogin').style.backgroundColor='red';
+            document.getElementById('PasswordLogin').style.backgroundColor='red';
+          }
+          if(bgFieldColor=='pcolor'){
+            document.getElementById('PasswordLogin').style.backgroundColor='red';
+          }
+          if(bgFieldColor=='ucolor'){
+            document.getElementById('UsernameLogin').value=data.data['uname'];
+            document.getElementById('PasswordLogin').value=data.data['pword'];
+            document.getElementById('UsernameLogin').style.backgroundColor='red';
+          }
+          // else{
+          //   document.getElementById('UsernameLogin').value='';
+          //   document.getElementById('PasswordLogin').value='';
+          // }
+
+          document.getElementById('UsernameLogin').addEventListener('keypress',function(){
+            document.getElementById('UsernameLogin').style.backgroundColor='blueviolet';
+          });
+          document.getElementById('PasswordLogin').addEventListener('keypress',function(){
+            document.getElementById('PasswordLogin').style.backgroundColor='blueviolet';
+          });
+          
+          document.querySelector('.signupHints').style.display='none';
+         });
+    });
+  });
+
+  $(document).ready(function () {
+   $("#signup").click(function () {
+      $.post("/movies",
+         {
+            reguname: document.getElementById('UsernameReg').value,
+            regpword: document.getElementById('PasswordReg').value,
+            regconfpword: document.getElementById('ConfirmPasswordReg').value,
+            Submit: 'SignUp'
+         },
+         function (data, status) {
+          let messageServer=data.data['message'];
+          let m1=data.data['m1'],m2=data.data['m2'],m3=data.data['m3'];
+
+          if(messageServer=='redirectOnSuccess'){
+            window.location.href = 'http://localhost:5555/movies/';
+            // window.location.replace('http://localhost:5556/movies/');
+          }
+          else{
+            document.getElementById('servermessage').innerHTML=messageServer;
+          }
+          
+        });
+    });
+  });
+
+  function signupFunc(){
+    document.getElementById('servermessage').innerHTML='';
+    
+    document.getElementById('loginDiv').style.display='none';
+    document.getElementById('signupDiv').style.display='block';
+
+    document.getElementById('message1').innerHTML='Registration';
+    document.getElementById('message2').innerHTML='';
+    document.getElementById('message2').style.border='none';
+
+    document.querySelector('.signupHints').style.display='block';
+  };
+
+  function loginFunc(){
+    document.getElementById('servermessage').innerHTML='';
+  
+    document.getElementById('loginDiv').style.display='block';
+    document.getElementById('signupDiv').style.display='none';
+
+    document.getElementById('message1').innerHTML='Welcome Back .!'
+    document.getElementById('message2').innerHTML='CineFlix-------'
+    document.getElementById('message2').style.borderStyle = "solid"; 
+    document.getElementById('message2').style.borderColor = "white";
+
+    document.getElementById('UsernameLogin').style.backgroundColor='blueviolet';
+    document.getElementById('PasswordLogin').style.backgroundColor='blueviolet';
+
+    document.querySelector('.signupHints').style.display='none';
+  }
+ </script>
+  
+  
+</body>
+</html>
