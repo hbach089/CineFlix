@@ -137,3 +137,99 @@ h2{
 #delBtn{
   --btn-bg-color:red;
 }
+
+
+/* NAVBAR */
+
+nav{
+  overflow: hidden;
+  /* width: 100%; */
+}
+#navbar{
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  width: 100%;
+}
+#logo{
+  width:1.1cm;
+  height:1.1cm;
+  margin-left: 20px;
+  margin-right: 20px;
+} 
+
+#logo:hover{
+  cursor: pointer;
+}
+
+.dropdown{
+  position: relative;
+  text-align: center;
+  left:88%;
+}
+
+.dropdown-content{
+  /* margin-left: 8px; */
+  display: none;
+  text-align: center;
+  background-color: white;
+  /* width: 2cm; */
+  z-index: 2;
+  /* float: right; */
+  padding: 4px;
+  /* margin-top: 4px; */
+  /* border: 4px solid darkgray; */
+  position: fixed;
+}
+
+.dropdown-content a{
+  display: block;
+  color: black;
+  text-align: center;
+  text-decoration:none;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;padding:0;
+}
+
+.dropdown:hover{
+  cursor: pointer;
+  display: block;
+}
+
+.drop_btn{
+  font-family: monospace;
+  text-align: center;
+  width: 80px;
+  background-color:white;
+  color: blueviolet;
+  padding: 5px;
+}
+
+.drop_btn:hover{
+  /* background-color: rgb(82, 4, 105); */
+  background-color: blueviolet;
+  color: aliceblue;
+}
+
+.navbar-brand{
+  padding-left: 0.5cm;
+}
+#titleAndText{
+  text-align: center;
+}
+#textUnderTitle{
+  font-size: smaller;
+  font-style: italic;
+  transition: 0.5s;
+  color: rgb(185, 184, 183);
+}
+#textUnderTitle:hover{
+  color: white;
+}
+#s1,#s2,#s3{
+  display: block;
+  /* width: 2cm; */
+  position: relative;
+}

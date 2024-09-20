@@ -47,7 +47,7 @@ app.get('/',(req,res)=>{
   }
 })
   
-app.post('/logout',(req,res)=>{
+app.all('/logout',(req,res)=>{
   loginStateChanged=false;
   req.session.destroy((err)=>{
     if(err){
@@ -175,6 +175,7 @@ app.get('/User/:UpdOrDel',async(req,res)=>{
   if(req.session.user){
     try{
       userUid=await findUser(req.session.user,res);
+      console.log(userUid.uid+" DANS DELETE!!!!! OUR UPDATE");
     }
     catch(err){
       res.status(500).send("Internal Sever Error.");
@@ -285,12 +286,13 @@ app.delete('/User/Delete/:urlUUID',async(req,res)=>{
   //try catch, delete user on success et redirect au homepage(index), sinon internal server error
   try{
     await deleteUser(req.params.urlUUID);
+    
+    res.status(200).json({message:'success'});
   }
   catch(error){
-
+    res.status(500).send('Interal Server Error');
   }
   console.log("Dans le delete: "+req.params.urlUUID);
-  res.send("YOOOOOO");
 })
 
 
