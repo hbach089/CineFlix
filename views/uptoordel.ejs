@@ -26,13 +26,12 @@
           <a id="nav_l1" class="nav-link" href="http://localhost:5555/movies/">Home</a>
         </li>
 
-      <div class="dropdown" >
-        <img src="/images/userlogo.png" alt="" id="logo">
-        <div id="logout" class="dropdown-content">
-          <span class="">Logout</span>
-          <a id="logoutbtn" href="http://localhost:5555/logout">Logout</a>
+        <div class="dropdown">
+          <img src="/images/userlogo.png" alt="" id="logo">
+          <div id="logout" class="dropdown-content">
+            <span id="s3" class="drop_btn">Logout</span>
+          </div>
         </div>
-      </div>
       <div></div>
 
     </div>
@@ -167,6 +166,9 @@
       document.getElementById('errmsg').innerHTML='';
       window.location.href='http://localhost:5555/logout';
     }
+    document.getElementById('s3').addEventListener('click',function(){
+      window.location.href='http://localhost:5555/logout';
+    })
   </script>
 </body>
 </html>
