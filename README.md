@@ -39,6 +39,8 @@
 
 * For the frontend, I utilized EJS for templating along with CSS and JavaScript to create an engaging and responsive user interface. The application allows users to input search terms through a sleek search bar and displays relevant movie results dynamically.
 
-* To enhance the user experience, I integrated an SQLite database to manage and manipulate user data effectively, ensuring that users can easily access their search history and preferences. Through a combination of robust backend logic and a modern aesthetic, CineFlix provides a simple and intuitive platform for movie enthusiasts.
+* To enhance the user experience, I integrated an SQLite database to manage and manipulate user data effectively. This allows for efficient management of user authentication while ensuring a seamless experience. Through a combination of robust backend logic and a modern aesthetic, CineFlix provides a simple and intuitive platform for movie enthusiasts.
+
+
 
 
