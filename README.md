@@ -1,5 +1,5 @@
 # CineFlix
-<i>Project Version 1.0 ________ 12/10/2024</i>
+<i>Project Version 1.0 ------------- 12/10/2024</i>
 
 CineFlix is a full-stack web application developed using Node.js, EJS (Embedded JavaScript), and CSS. The application allows users to search for movies through a user-friendly search bar and retrieves a list of movies related to the entered text.
 
