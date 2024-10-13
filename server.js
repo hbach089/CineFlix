@@ -32,12 +32,13 @@ const io = new Server(server);
 
 let getAPIinfo={};
 
-// app.set('view engine', 'html');
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
-// app.engine('html', require('ejs').renderFile);
 app.use(urlencoded({extended:true}));
 
+/**
+ * If user already logged in, automatically redirect him to homepage
+ */
 app.get('/',(req,res)=>{
   if(req.session.user){
     res.redirect('/movies');
@@ -47,8 +48,14 @@ app.get('/',(req,res)=>{
   }
 })
   
+
+/**
+ * Logout route
+ */
 app.all('/logout',(req,res)=>{
   loginStateChanged=false;
+
+  //Destroys user session object
   req.session.destroy((err)=>{
     if(err){
       res.status(500).send('Internal server error!');
@@ -59,7 +66,9 @@ app.all('/logout',(req,res)=>{
   });
 })
 
-//Render movies page
+/**
+ * Render movies page
+ */
 app.get('/movies',(req,res)=>{
   if(req.session.user){
     res.render('movies');
@@ -69,6 +78,11 @@ app.get('/movies',(req,res)=>{
   }
 })
 
+
+/**
+ * After user login or signup,
+ * post data to homepage
+ */
 app.post('/movies',async (req,res)=>{
     const sessionData=req.session;
     loginStateChanged=false;
@@ -96,8 +110,6 @@ app.post('/movies',async (req,res)=>{
             sessionData.SignedIn=false;
 
             res.status(200).json({data:{message:'redirectOnSuccess'}});
-            //IL FAUT RES.JSON AVEC UN MESSAGE VIDE!!!!!!!!!!! ET PUIS REDIRECT DANS LE CLIENT!
-            // res.redirect('/movies');
           }
           catch(error){
             // On a reject, render the index page with an error message, i.e failed login
@@ -149,7 +161,6 @@ app.post('/movies',async (req,res)=>{
               //If all is good, Promise is resolved and we redirect to /movies route
               loginStateChanged = true;
               res.status(200).json({data:{message:'redirectOnSuccess'}});
-              // res.redirect('/movies');
             }
             //If username exists, index page is rendered
             catch(error){
@@ -161,6 +172,9 @@ app.post('/movies',async (req,res)=>{
     } 
 })
 
+/**
+ * View pricing page, when user clicks on movies displayed
+ */
 app.get('/movies/Prices',(req,res)=>{
   if(req.session.user){
     res.render('priceofferings')
@@ -170,12 +184,15 @@ app.get('/movies/Prices',(req,res)=>{
   }
 })
 
+/**
+ * User Update or Delete page (based on button clicked in options)
+ */
 app.get('/User/:UpdOrDel',async(req,res)=>{
   let userUid;
   if(req.session.user){
     try{
+      //find user uuid in database
       userUid=await findUser(req.session.user,res);
-      console.log(userUid.uid+" DANS DELETE!!!!! OUR UPDATE");
     }
     catch(err){
       res.status(500).send("Internal Sever Error.");
@@ -190,33 +207,39 @@ app.get('/User/:UpdOrDel',async(req,res)=>{
 })
 
 
-///movies/Update/changeFields
+/**
+ * Route when user submits data to delete or update.
+ */
 app.post('/User/:UptOrDel',async(req,res)=>{
   let uname=req.body.uname;
   let pword=req.body.pword;
   let confpword=req.body.confpword;
+
+  //If any fields are empty
   if(uname=='' || pword=='' || confpword==''){
     res.status(200).json({message:'Please Complete all Fields!',errm:'e1'})
   }
   else{
     try{
+      //checks if user is in Database
       await userInDatabase(uname,pword);
       res.status(200).json({message:'success'});
     }
     catch{
+      //wrong credentials
       res.status(200).json({message:'Wrong Credentials. Try again!',errm:'e3'});
     }
   }
 })
 
 
-//SELECT ET affiche dans le ui
+/**
+ * Route if user successfuly authenticated to update credentials
+ */
 app.get('/User/Update/:urlUUID',async(req,res)=>{
-  // console.log("FROM THE URL+ "+req.params.urlUUID);
-  //get le uname et pword de la db et affiche sur la page.
-  //sinon, si on appuie sur le btn, on update dans la db avec les valeurs qu on veut!
   if(req.session.user){
     try{
+        //find user credentials based on UUID of logged in user
         let userCreds=await findUserToUpdate(req.params.urlUUID);
         res.render('changeFields',{data:{uuid:req.params.urlUUID,uname:userCreds.username,pword:userCreds.password}});
     }
@@ -230,23 +253,24 @@ app.get('/User/Update/:urlUUID',async(req,res)=>{
   
 })
 
-//update les valeurs dans le ui! avec AJAX
+/**
+ * Put route for updating user credentials (on button click)
+ */
 app.put('/User/Update/:urlUUID',async(req,res)=>{
   let putuname=req.body.uname, putpword=req.body.pword;
   let dbuname,dbpword;
-  console.log("DANS LE PUT!");
-  console.log('pour uname: '+verifyUsername(putuname)+'    et pour pword '+verifyPassword(putpword))
 
   try{
+    //find user credentials based on UUID of logged in user
     let userCreds=await findUserToUpdate(req.params.urlUUID);
     dbuname=userCreds.username;
     dbpword=userCreds.password;
-    // res.render('changeFields',{data:{uuid:req.params.urlUUID,uname:userCreds.username,pword:userCreds.password}});
   }
   catch(error){
     res.status(500).send("Internal Server Error");
   }
 
+  //error handling when user submits data
   if(putuname=='' || putpword==''){
     res.status(200).json({message:'Fields Cannot be Empty!'});
   }
@@ -254,25 +278,19 @@ app.put('/User/Update/:urlUUID',async(req,res)=>{
     res.status(200).json({message:'Please Update at Least One of the Fields!'});
   }
   else{
-    console.log((verifyUsername(putuname)==false || verifyPassword(putpword)==false))
     if((verifyUsername(putuname)==false || verifyPassword(putpword)==false)){
-      console.log("WRONG FROMAT!!!!!!");
       res.status(200).json({message:'Credentials must Follow Correct Format!'});
     }
     else{
-      // try{
-      //   await checkUnamexists(putuname);
+      //When user enters valid credentials
         try{
+          //async function that updates user in database
           await updateUser(req.params.urlUUID,putuname,putpword);
           res.status(200).json({message:'SUCCESS ON UPDATE!!.'});
         }
         catch(err){
           res.status(500).send("Internal Server Error");
         }
-      // }
-      // catch(err){
-      //   res.status(200).json({message:'Username is Already Taken! Please Enter a New One.'});
-      // }
     }
     
   }
@@ -282,17 +300,19 @@ app.put('/User/Update/:urlUUID',async(req,res)=>{
   // res.send('MESSAGE INHIAR MFFFFF');
 })
 
+/**
+ * Delete user route
+ */
 app.delete('/User/Delete/:urlUUID',async(req,res)=>{
   //try catch, delete user on success et redirect au homepage(index), sinon internal server error
   try{
+    //function that deletes user in database based on UUID of logged in user
     await deleteUser(req.params.urlUUID);
-    
     res.status(200).json({message:'success'});
   }
   catch(error){
     res.status(500).send('Interal Server Error');
   }
-  console.log("Dans le delete: "+req.params.urlUUID);
 })
 
 
@@ -326,9 +346,6 @@ io.on('connection',(socket)=>{
     })
   })
 })
-
-
-
 
 
 //Username must be at least 6 chars long
@@ -420,7 +437,7 @@ function userInDatabase(uname,pword){
   })
 }
 
-//UITILISE POUR GET UUID ET MET LE DANS LE URLLLLLLLL!!!!!
+//find full user credentials (including uuid) based on username
 function findUser(uname,res){
   return new Promise((resolve,reject)=>{
     const sql='SELECT uid,username,password FROM User WHERE username=?';
@@ -440,6 +457,7 @@ function findUser(uname,res){
   })
 }
 
+//Finds user to update based on uuid
 function findUserToUpdate(uuid){
   return new Promise((resolve,reject)=>{
     const sql='SELECT username,password FROM User WHERE uid=?';
@@ -459,13 +477,13 @@ function findUserToUpdate(uuid){
   })
 }
 
+//Update user in database based on uuid of logged in user
 function updateUser(uuid,newuname,newpword){
   return new Promise((resolve,reject)=>{
     const sql='UPDATE User SET username=(?),password=(?) WHERE uid=(?)';
     db.run(sql,[newuname,newpword,uuid],(err)=>{
       if(err){
         reject(err);
-        // res.status(500).send("Internal Server Error");
       }
       else{
         resolve(true);
@@ -474,7 +492,7 @@ function updateUser(uuid,newuname,newpword){
   });
 }
 
-//Function that performs API call
+//Function that performs API call (Movie Database Alternative API )
 async function api(searchVal){
   const url = 'https://movie-database-alternative.p.rapidapi.com/?s='+searchVal[0]+'&r=json&page=2';
   const options = {
