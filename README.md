@@ -11,27 +11,27 @@
 
 ### 2. Homepage
 <p align='center'>
- <img width="937" alt="image" src="https://github.com/user-attachments/assets/96fe5290-7714-442e-89cd-c03d317504fd">
+ <img width="730" alt="image" src="https://github.com/user-attachments/assets/96fe5290-7714-442e-89cd-c03d317504fd">
 </p>
 
 ### 3. Pricing
 <p align='center'>
- <img width="949" alt="image" src="https://github.com/user-attachments/assets/bb1299db-cf5e-479c-8a39-d5143afe8356">
+ <img width="730"" alt="image" src="https://github.com/user-attachments/assets/bb1299db-cf5e-479c-8a39-d5143afe8356">
 </p>
  
 ### 4. Homepage
 <p align='center'>
- <img width="937" alt="image" src="https://github.com/user-attachments/assets/96fe5290-7714-442e-89cd-c03d317504fd">
+ <img width="730" alt="image" src="https://github.com/user-attachments/assets/96fe5290-7714-442e-89cd-c03d317504fd">
 </p>
 
 ### 5. Update/Delete
 <p align='center'>
- <img width="948" alt="image" src="https://github.com/user-attachments/assets/babc3f04-412b-464e-b317-e5bfca49fb3b">
+ <img width="730" alt="image" src="https://github.com/user-attachments/assets/babc3f04-412b-464e-b317-e5bfca49fb3b">
 </p>
 
 ### 6. Update Credentials
 <p align='center'>
- <img width="952" alt="image" src="https://github.com/user-attachments/assets/bc9f19d0-80b6-4df9-84ca-25950235eb9a">
+ <img width="730" alt="image" src="https://github.com/user-attachments/assets/bc9f19d0-80b6-4df9-84ca-25950235eb9a">
 </p>
 
 ## Description:
