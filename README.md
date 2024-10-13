@@ -5,7 +5,7 @@
 ## Screenshots:
 ### 1. Login page
 <p align='center'>
- <img alt="image" src="https://github.com/user-attachments/assets/d09c2584-8359-4cdb-8f50-ed33f4f225c0=250x250">
+ <img width="500" alt="image" src="https://github.com/user-attachments/assets/d09c2584-8359-4cdb-8f50-ed33f4f225c0>
 </p>
 
 ### 2. Homepage
