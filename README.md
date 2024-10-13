@@ -2,7 +2,7 @@
 
 <i>CineFlix is a full-stack web application developed using Node.js, EJS (Embedded JavaScript), and CSS. The application allows users to search for movies through a user-friendly search bar and retrieves a list of movies related to the entered text.</i>
 
-## Screenshots
+## Screenshots:
 ### 1. Login page
 <p align='center'>
  <img width="926" alt="image" src="https://github.com/user-attachments/assets/d09c2584-8359-4cdb-8f50-ed33f4f225c0">
@@ -32,4 +32,13 @@
 <p align='center'>
  <img width="952" alt="image" src="https://github.com/user-attachments/assets/bc9f19d0-80b6-4df9-84ca-25950235eb9a">
 </p>
+
+## Description:
+
+* CineFlix is a full-stack movie search web application designed to deliver comprehensive movie information based on user queries. Using Node.js for the backend, I implemented a server that communicates with the RapidAPI to retrieve real-time movie data for any given title or keyword.
+
+* For the frontend, I utilized EJS for templating along with CSS and JavaScript to create an engaging and responsive user interface. The application allows users to input search terms through a sleek search bar and displays relevant movie results dynamically.
+
+* To enhance the user experience, I integrated an SQLite database to manage and manipulate user data effectively, ensuring that users can easily access their search history and preferences. Through a combination of robust backend logic and a modern aesthetic, CineFlix provides a simple and intuitive platform for movie enthusiasts.
+
 
